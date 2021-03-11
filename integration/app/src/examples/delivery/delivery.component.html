@@ -1,0 +1,37 @@
+<h1>DeliveryState</h1>
+<div>
+    In this example we use the <code>InterceptorStrategy</code> class to configure
+    pre-serialization/post-deserialization interceptors within the @ngxs-labs/storage-plugin. The pre-serialization
+    interceptor keeps the width, length and height for a parcel but excludes the description from being serialized. The
+    post-serialization interceptor instantiates a <code>DeliveryStateModel</code> concrete class.
+</div>
+<form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+    <p>
+        <label>
+            Width:
+            <input type="number" formControlName="width" required />
+        </label>
+    </p>
+    <p>
+        <label>
+            Length:
+            <input type="number" formControlName="length" required />
+        </label>
+    </p>
+    <p>
+        <label>
+            Height:
+            <input type="number" formControlName="height" required />
+        </label>
+    </p>
+    <p>
+        <label>
+            Description:
+            <input type="text" size="50" formControlName="description" />
+        </label>
+    </p>
+    <p>
+        <button [disabled]="!deliveryForm.valid">Calculate</button>
+    </p>
+    <p *ngIf="parcel$ | async as parcel">The volume is: {{ parcel.volume }}</p>
+</form>

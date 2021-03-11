@@ -1,0 +1,37 @@
+{
+    "name": "@ngxs-labs/storage-plugin-extension",
+    "version": "1.0.0",
+    "license": "MIT",
+    "schematics": "./schematics/collection.json",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ngxs-storage-plugin-extension/storage-plugin-extension.git"
+    },
+    "keywords": [
+        "ngxs",
+        "state",
+        "rxjs",
+        "angular",
+        "cqrs",
+        "store",
+        "state-management",
+        "storage-plugin",
+        "storage-plugin-extension"
+    ],
+    "contributors": [
+        {
+            "name": "David Morissette",
+            "email": "david.morissette@outlook.com"
+        }
+    ],
+    "bugs": {
+        "url": "https://github.com/ngxs-storage-plugin-extension/storage-plugin-extension/issues"
+    },
+    "homepage": "https://github.com/ngxs-labs/storage-plugin-extension#readme",
+    "peerDependencies": {
+        "@angular/core": ">=9",
+        "@ngxs/store": ">=3.6.2",
+        "@ngxs/storage-plugin": ">=3.6.2",
+        "typescript": ">=3.7.0"
+    }
+}

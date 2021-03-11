@@ -1,0 +1,12 @@
+{
+    "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
+    "lib": {
+        "entryFile": "public_api.ts",
+        "flatModuleFile": "ngxs-labs-storage-plugin-extension",
+        "umdModuleIds": {
+            "@ngxs/storage-plugin": "ngxs-storage-plugin"
+        }
+    },
+    "dest": "../dist/ngxs-storage-plugin-extension",
+    "assets": ["ngcc.config.js"]
+}

@@ -1,0 +1,8 @@
+**/*.lint.ts
+**/*.d.ts
+**/dist/**
+**/node_modules/**
+**/coverage/**
+**/docs/**
+**/*.spec.ts
+**/*.md

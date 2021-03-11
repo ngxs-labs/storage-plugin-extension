@@ -1,0 +1,25 @@
+{
+    "extends": "@angular-ru/tsconfig",
+    "angularCompilerOptions": {
+        "strictTemplates": true,
+        "fullTemplateTypeCheck": true,
+        "annotateForClosureCompiler": true,
+        "strictInjectionParameters": true,
+        "skipTemplateCodegen": false,
+        "preserveWhitespaces": true,
+        "skipMetadataEmit": false,
+        "disableTypeScriptVersionCheck": true
+    },
+    "compilerOptions": {
+        "baseUrl": "./",
+        "outDir": "./dist/out-tsc",
+        "target": "es2015",
+        "lib": ["es2017", "dom"],
+        "module": "esnext",
+        "typeRoots": ["./node_modules/@types"],
+        "paths": {
+            "@ngxs-labs/storage-plugin-extension": ["./lib/public_api.ts"]
+        }
+    },
+    "exclude": ["integration/types"]
+}

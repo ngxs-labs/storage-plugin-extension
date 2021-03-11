@@ -1,0 +1,4 @@
+{
+    "extends": ["github>Angular-RU/angular-renovate-config"],
+    "baseBranches": ["master"]
+}
