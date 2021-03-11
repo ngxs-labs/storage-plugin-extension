@@ -27,6 +27,11 @@ on the Storage Plugin configuration.
 
 ### Simple example
 
+In this example we use the <code>InterceptorStrategy</code> class to configure
+pre-serialization/post-deserialization interceptors within the @ngxs-labs/storage-plugin. The pre-serialization
+interceptor keeps the width, length and height for a parcel but excludes the description from being serialized. The
+post-serialization interceptor instantiates a <code>DeliveryStateModel</code> concrete class.
+
 `parcel.ts`
 
 ```ts
