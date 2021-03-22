@@ -3,7 +3,11 @@
 
 name: NGXS STORAGE PLUGIN EXTENSION CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
     build-and-deploy:
@@ -17,43 +21,32 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
-                with:
-                    fetch-depth: '0'
-
-            -   run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
             -   name: Use Node.js ${{ matrix.node-version }}
                 uses: actions/setup-node@v1
                 with:
                     node-version: ${{ matrix.node-version }}
-
             -   uses: actions/cache@v2
                 with:
-                    path: '**/node_modules'
+                    path: node_modules
                     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+                    restore-keys: ${{ runner.os }}-yarn
 
-            -   name: Run install step
+            -   name: Install dependencies
                 run: |
                     yarn install --frozen-lockfile --non-interactive
 
-            -   name: Run building libraries step
+            -   name: Build libraries
                 run: |
                     yarn build:lib
 
-            -   name: Run lint step
+            -   name: Run lint
                 run: |
                     yarn lint
 
-            -   name: Run test step
+            -   name: Run tests
                 run: |
                     yarn test --coverage
                     yarn test:types
 
-            -   name: Run building integration apps step
+            -   name: Build integration app
                 run: yarn build:app
-
-            -   name: Deploy integration apps
-                env:
-                    GH_TOKEN: ${{ secrets.GH_DEPLOY }}
-                if: contains('refs/heads/master', github.ref)
-                run: yarn ng deploy
