@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "build:app": "ng build --prod",
-        "build:lib": "ng build library && copy README.md dist/ngxs-storage-plugin-extension",
+        "build:lib": "ng build library && cp README.md dist/ngxs-storage-plugin-extension",
         "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "format": "npx sort-package-json && prettier --write \"**/*.{js,ts,html,css,scss,md,json,yml}\"",
         "postinstall": "ngcc --async",
