@@ -46,7 +46,6 @@ jobs:
             -   name: Run tests
                 run: |
                     yarn test --coverage
-                    yarn test:types
 
             -   name: Build integration app
                 run: yarn build:app

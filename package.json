@@ -10,8 +10,7 @@
         "postinstall": "ngcc --async",
         "lint": "eslint --cache \"**/*.ts\"",
         "start": "ng serve --open --port 4400",
-        "test": "jest --config ./jest.config.js",
-        "test:types": "dtslint ./integration/types --localTs node_modules/typescript/lib"
+        "test": "jest --config ./jest.config.js"
     },
     "prettier": "@angular-ru/prettier-config",
     "devDependencies": {
