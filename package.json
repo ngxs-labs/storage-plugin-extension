@@ -14,7 +14,7 @@
         "test:types": "dtslint ./integration/types --localTs node_modules/typescript/lib"
     },
     "dependencies": {
-        "@types/jest": "26.0.20"
+        "@types/jest": "26.0.22"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "0.1002.0",
