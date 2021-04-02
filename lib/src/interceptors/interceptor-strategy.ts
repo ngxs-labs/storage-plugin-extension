@@ -1,10 +1,10 @@
-import { NgxsStoragePluginOptions } from "@ngxs/storage-plugin";
+import { NgxsStoragePluginOptions } from '@ngxs/storage-plugin';
 
-import { DEFAULT_STATE_KEY } from "../internals/internals";
-import { InterceptorOption } from "./interceptor-option";
+import { DEFAULT_STATE_KEY } from '../internals/internals';
+import { InterceptorOption } from './interceptor-option';
 
 export class InterceptorStrategy {
-    constructor(private _options: InterceptorOption[]) {}
+    constructor(private readonly _options: InterceptorOption[]) {}
 
     configure(options: NgxsStoragePluginOptions): NgxsStoragePluginOptions {
         options.beforeSerialize = (obj: any, key: string) => this._beforeSerialize(obj, key);
@@ -14,11 +14,11 @@ export class InterceptorStrategy {
     }
 
     protected _beforeSerialize(obj: any, key: string): any {
-        return this._executeStrategy(obj, key, (option) => option.onBeforeSerialize);
+        return this._executeStrategy(obj, key, (option: InterceptorOption) => option.onBeforeSerialize);
     }
 
     protected _afterDeserialize(obj: any, key: string): any {
-        return this._executeStrategy(obj, key, (option) => option.onAfterDeserialize);
+        return this._executeStrategy(obj, key, (option: InterceptorOption) => option.onAfterDeserialize);
     }
 
     private _executeStrategy(
@@ -26,10 +26,10 @@ export class InterceptorStrategy {
         key: string,
         func: (option: InterceptorOption) => ((obj: any) => any) | undefined
     ) {
-        const strategy = this._findStrategy(key);
+        const strategy: InterceptorOption | undefined = this._findStrategy(key);
 
         if (strategy) {
-            const prototype = func(strategy);
+            const prototype: ((obj: any) => any) | undefined = func(strategy);
 
             if (prototype) {
                 return prototype(obj);
@@ -40,6 +40,8 @@ export class InterceptorStrategy {
     }
 
     private _findStrategy(key: string): InterceptorOption | undefined {
-        return this._options.find((strategy) => (!strategy.key && key === DEFAULT_STATE_KEY) || strategy.key === key);
+        return this._options.find(
+            (strategy: InterceptorOption) => (!strategy.key && key === DEFAULT_STATE_KEY) || strategy.key === key
+        );
     }
 }

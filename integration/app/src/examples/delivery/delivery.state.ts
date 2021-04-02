@@ -1,8 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { Action, Selector, State, StateContext } from "@ngxs/store";
-
-import { Parcel } from "./parcel";
+import { Parcel } from './parcel';
 
 export interface DeliveryStateModel {
     parcel?: Parcel;
@@ -10,13 +9,13 @@ export interface DeliveryStateModel {
 }
 
 export class RegisterDelivery {
-    static readonly type = "[DELIVERY] Register Delivery";
+    static readonly type: string = '[DELIVERY] Register Delivery';
 
     constructor(public parcel: Parcel, public description: string) {}
 }
 
 @State<DeliveryStateModel>({
-    name: "delivery",
+    name: 'delivery'
 })
 @Injectable()
 export class DeliveryState {
@@ -34,7 +33,7 @@ export class DeliveryState {
     registerDelivery(context: StateContext<DeliveryStateModel>, action: RegisterDelivery) {
         context.setState({
             parcel: action.parcel,
-            description: action.description,
+            description: action.description
         });
     }
 }

@@ -1,16 +1,15 @@
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsModule } from '@ngxs/store';
 
-import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
-import { NgxsStoragePluginModule } from "@ngxs/storage-plugin";
-import { NgxsModule } from "@ngxs/store";
-
-import { environment } from "../environments/environment";
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { strategy } from "./configuration";
-import { DeliveryState } from "./examples/delivery/delivery.state";
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { strategy } from './configuration';
+import { DeliveryState } from './examples/delivery/delivery.state';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,16 +18,16 @@ import { DeliveryState } from "./examples/delivery/delivery.state";
         AppRoutingModule,
         BrowserAnimationsModule,
         NgxsModule.forRoot([DeliveryState], {
-            developmentMode: !environment.production,
+            developmentMode: !environment.production
         }),
         NgxsStoragePluginModule.forRoot(
             strategy.configure({
-                key: DeliveryState,
+                key: DeliveryState
             })
         ),
-        NgxsLoggerPluginModule.forRoot(),
+        NgxsLoggerPluginModule.forRoot()
     ],
     providers: [],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

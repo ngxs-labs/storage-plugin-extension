@@ -1,16 +1,16 @@
 {
-  "ExpandedNodes": [
-    "",
-    "\\.github",
-    "\\.github\\workflows",
-    "\\integration",
-    "\\integration\\app",
-    "\\integration\\app\\src",
-    "\\integration\\app\\src\\examples",
-    "\\integration\\app\\src\\examples\\delivery",
-    "\\integration\\tests",
-    "\\integration\\tests\\interceptors"
-  ],
-  "SelectedNode": "\\.github\\workflows\\workflow.yml",
-  "PreviewInSolutionExplorer": false
+    "ExpandedNodes": [
+        "",
+        "\\integration",
+        "\\integration\\app",
+        "\\integration\\app\\environments",
+        "\\integration\\tests",
+        "\\integration\\tests\\interceptors",
+        "\\lib",
+        "\\lib\\src",
+        "\\lib\\src\\interceptors",
+        "\\lib\\src\\internals"
+    ],
+    "SelectedNode": "\\jest.config.js",
+    "PreviewInSolutionExplorer": false
 }
