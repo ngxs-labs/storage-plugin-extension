@@ -11,7 +11,8 @@ import { RouterModule } from '@angular/router';
             },
             {
                 path: 'package',
-                loadChildren: () => import('./examples/delivery/delivery.module').then((m: any) => m.DeliveryModule)
+                // eslint-disable-next-line @typescript-eslint/tslint/config, @typescript-eslint/explicit-function-return-type
+                loadChildren: () => import('./examples/delivery/delivery.module').then((m) => m.DeliveryModule)
             }
         ])
     ],

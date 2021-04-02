@@ -1,16 +1,5 @@
 {
-    "ExpandedNodes": [
-        "",
-        "\\integration",
-        "\\integration\\app",
-        "\\integration\\app\\environments",
-        "\\integration\\tests",
-        "\\integration\\tests\\interceptors",
-        "\\lib",
-        "\\lib\\src",
-        "\\lib\\src\\interceptors",
-        "\\lib\\src\\internals"
-    ],
-    "SelectedNode": "\\jest.config.js",
+    "ExpandedNodes": ["", "\\integration", "\\integration\\app", "\\integration\\app\\src", "\\lib"],
+    "SelectedNode": "\\.gitignore",
     "PreviewInSolutionExplorer": false
 }

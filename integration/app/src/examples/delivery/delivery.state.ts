@@ -9,7 +9,7 @@ export interface DeliveryStateModel {
 }
 
 export class RegisterDelivery {
-    static readonly type: string = '[DELIVERY] Register Delivery';
+    public static readonly type: string = '[DELIVERY] Register Delivery';
 
     constructor(public parcel: Parcel, public description: string) {}
 }
@@ -20,17 +20,17 @@ export class RegisterDelivery {
 @Injectable()
 export class DeliveryState {
     @Selector()
-    static parcel(state: DeliveryStateModel): Parcel | undefined {
+    public static parcel(state: DeliveryStateModel): Parcel | undefined {
         return state.parcel;
     }
 
     @Selector()
-    static description(state: DeliveryStateModel): string {
+    public static description(state: DeliveryStateModel): string {
         return state.description;
     }
 
     @Action(RegisterDelivery)
-    registerDelivery(context: StateContext<DeliveryStateModel>, action: RegisterDelivery) {
+    public registerDelivery(context: StateContext<DeliveryStateModel>, action: RegisterDelivery): void {
         context.setState({
             parcel: action.parcel,
             description: action.description
