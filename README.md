@@ -18,19 +18,21 @@ NGXS Storage Plugin Extension API is a collection of extensions for the NGXS Sto
 ### InterceptorStrategy
 
 The interceptor strategy is a convenient way to configure the before and after serialization properties
-on the Storage Plugin configuration.
+on the Storage Plugin configuration. It allows you to define an array of configuration options to
+be executed on specific states.
 
 ### Quick Links
 
 -   😎 Checkout the [sample application](./integration)
 -   📝 Learn about updates from the [changelog](CHANGELOG.md)
 
-### Simple example
+### Delivery example
 
 In this example we use the <code>InterceptorStrategy</code> class to configure
 pre-serialization/post-deserialization interceptors within the @ngxs-labs/storage-plugin. The pre-serialization
 interceptor keeps the width, length and height for a parcel but excludes the description from being serialized. The
-post-serialization interceptor instantiates a <code>DeliveryStateModel</code> concrete class.
+post-serialization interceptor instantiates the <code>ShipmentStateModel</code> and the
+<code>AccountStateModel</code> concrete classes.
 
 `parcel.ts`
 
@@ -38,46 +40,90 @@ post-serialization interceptor instantiates a <code>DeliveryStateModel</code> co
 export class Parcel {
     constructor(public width: number, public height: number, public length: number) {}
 
-    get volume(): number {
+    public get volume(): number {
         return this.width * this.length * this.height;
     }
 }
 ```
 
-`delivery.state.ts`
+`shipment.state.ts`
 
 ```ts
-export interface DeliveryStateModel {
+export interface ShipmentStateModel {
     parcel?: Parcel;
     description: string;
 }
 
-export class RegisterDelivery {
-    static readonly type = "[DELIVERY] Register Delivery";
+export class SaveShipment {
+    public static readonly type: string = '[SHIPMENT] Save Shipment';
 
     constructor(public parcel: Parcel, public description: string) {}
 }
 
-@State<DeliveryStateModel>({
-    name: "delivery",
+@State<ShipmentStateModel>({
+    name: 'shipment'
 })
 @Injectable()
-export class DeliveryState {
+export class ShipmentState {
     @Selector()
-    static parcel(state: DeliveryStateModel): Parcel | undefined {
+    public static parcel(state: ShipmentStateModel): Parcel | undefined {
         return state.parcel;
     }
 
     @Selector()
-    static description(state: DeliveryStateModel): string {
+    public static description(state: ShipmentStateModel): string {
         return state.description;
     }
 
-    @Action(RegisterDelivery)
-    registerDelivery(context: StateContext<DeliveryStateModel>, action: RegisterDelivery) {
+    @Action(SaveShipment)
+    public saveShipment(context: StateContext<ShipmentStateModel>, action: SaveShipment): void {
         context.setState({
             parcel: action.parcel,
-            description: action.description,
+            description: action.description
+        });
+    }
+}
+```
+
+`account.ts`
+
+```ts
+export class Account {
+    constructor(public number: string) {}
+
+    public get status(): string {
+        return this.number ? 'valid' : 'invalid';
+    }
+}
+```
+
+`account.state.ts`
+
+```ts
+export interface AccountStateModel {
+    account?: Account;
+}
+
+export class SaveAccount {
+    public static readonly type: string = '[ACCOUNT] Save Account';
+
+    constructor(public account: Account) {}
+}
+
+@State<AccountStateModel>({
+    name: 'account'
+})
+@Injectable()
+export class AccountState {
+    @Selector()
+    public static account(state: AccountStateModel): Account | undefined {
+        return state.account;
+    }
+
+    @Action(SaveAccount)
+    public saveAccount(context: StateContext<AccountStateModel>, action: SaveAccount): void {
+        context.setState({
+            account: action.account
         });
     }
 }
@@ -86,21 +132,25 @@ export class DeliveryState {
 `configuration.ts`
 
 ```ts
-export const strategy = new InterceptorStrategy([
+export const strategy: InterceptorStrategy = new InterceptorStrategy([
     {
-        key: "delivery",
-        onBeforeSerialize: (obj) => {
-            return {
-                parcel: obj.parcel,
-            };
-        },
-        onAfterDeserialize: (obj) => {
-            return {
+        key: 'shipment',
+        onBeforeSerialize: (obj: any): any => ({
+            parcel: obj.parcel
+        }),
+        onAfterDeserialize: (obj: any): ShipmentStateModel =>
+            ({
                 parcel: obj.parcel ? new Parcel(obj.parcel.width, obj.parcel.height, obj.parcel.length) : null,
-                description: obj.description,
-            } as DeliveryStateModel;
-        },
+                description: obj.description
+            } as ShipmentStateModel)
     },
+    {
+        key: 'account',
+        onAfterDeserialize: (obj: any): AccountStateModel =>
+            ({
+                account: obj.account ? new Account(obj.account.number) : null
+            } as AccountStateModel)
+    }
 ]);
 ```
 
@@ -113,14 +163,18 @@ export const strategy = new InterceptorStrategy([
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        NgxsModule.forRoot([DeliveryState]),
+        NgxsModule.forRoot([ShipmentState, AccountState], {
+            developmentMode: !environment.production
+        }),
         NgxsStoragePluginModule.forRoot(
             strategy.configure({
-                key: DeliveryState,
+                key: [ShipmentState, AccountState]
             })
-        )
+        ),
+        NgxsLoggerPluginModule.forRoot()
     ],
-    bootstrap: [AppComponent],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```

@@ -3,34 +3,34 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { Parcel } from './parcel';
 
-export interface DeliveryStateModel {
+export interface ShipmentStateModel {
     parcel?: Parcel;
     description: string;
 }
 
-export class RegisterDelivery {
-    public static readonly type: string = '[DELIVERY] Register Delivery';
+export class SaveShipment {
+    public static readonly type: string = '[SHIPMENT] Save Shipment';
 
     constructor(public parcel: Parcel, public description: string) {}
 }
 
-@State<DeliveryStateModel>({
-    name: 'delivery'
+@State<ShipmentStateModel>({
+    name: 'shipment'
 })
 @Injectable()
-export class DeliveryState {
+export class ShipmentState {
     @Selector()
-    public static parcel(state: DeliveryStateModel): Parcel | undefined {
+    public static parcel(state: ShipmentStateModel): Parcel | undefined {
         return state.parcel;
     }
 
     @Selector()
-    public static description(state: DeliveryStateModel): string {
+    public static description(state: ShipmentStateModel): string {
         return state.description;
     }
 
-    @Action(RegisterDelivery)
-    public registerDelivery(context: StateContext<DeliveryStateModel>, action: RegisterDelivery): void {
+    @Action(SaveShipment)
+    public saveShipment(context: StateContext<ShipmentStateModel>, action: SaveShipment): void {
         context.setState({
             parcel: action.parcel,
             description: action.description

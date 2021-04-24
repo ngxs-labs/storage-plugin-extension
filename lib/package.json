@@ -1,6 +1,6 @@
 {
     "name": "@ngxs-labs/storage-plugin-extension",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "schematics": "./schematics/collection.json",
     "repository": {

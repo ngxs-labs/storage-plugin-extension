@@ -1,0 +1,15 @@
+<h2>AccountState</h2>
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <p>
+        <label>
+            Account number:
+            <input maxlength="6" formControlName="number" required />
+        </label>
+    </p>
+    <p>
+        <button [disabled]="!accountForm.valid">Save</button>
+    </p>
+    <ng-container *ngIf="account$ | async as account">
+        <p *ngIf="account.status === 'valid'">The account is valid.</p>
+    </ng-container>
+</form>

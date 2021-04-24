@@ -1,0 +1,31 @@
+<h2>ShipmentState</h2>
+<form [formGroup]="shipmentForm" (ngSubmit)="onSubmit()">
+    <p>
+        <label>
+            Width:
+            <input type="number" formControlName="width" required />
+        </label>
+    </p>
+    <p>
+        <label>
+            Length:
+            <input type="number" formControlName="length" required />
+        </label>
+    </p>
+    <p>
+        <label>
+            Height:
+            <input type="number" formControlName="height" required />
+        </label>
+    </p>
+    <p>
+        <label>
+            Description:
+            <input type="text" size="50" formControlName="description" />
+        </label>
+    </p>
+    <p>
+        <button [disabled]="!shipmentForm.valid">Save</button>
+    </p>
+    <p *ngIf="parcel$ | async as parcel">The volume is: {{ parcel.volume }}</p>
+</form>

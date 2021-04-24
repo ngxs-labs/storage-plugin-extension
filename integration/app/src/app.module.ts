@@ -9,7 +9,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { strategy } from './configuration';
-import { DeliveryState } from './examples/delivery/delivery.state';
+import { AccountState } from './examples/delivery/account.state';
+import { ShipmentState } from './examples/delivery/shipment.state';
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,12 +18,12 @@ import { DeliveryState } from './examples/delivery/delivery.state';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        NgxsModule.forRoot([DeliveryState], {
+        NgxsModule.forRoot([ShipmentState, AccountState], {
             developmentMode: !environment.production
         }),
         NgxsStoragePluginModule.forRoot(
             strategy.configure({
-                key: DeliveryState
+                key: [ShipmentState, AccountState]
             })
         ),
         NgxsLoggerPluginModule.forRoot()
