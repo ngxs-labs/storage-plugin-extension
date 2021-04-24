@@ -1,17 +1,17 @@
 {
-  "ExpandedNodes": [
-    "",
-    "\\integration",
-    "\\integration\\app",
-    "\\integration\\app\\src",
-    "\\integration\\app\\src\\examples",
-    "\\integration\\app\\src\\examples\\delivery",
-    "\\integration\\tests",
-    "\\integration\\tests\\interceptors",
-    "\\lib",
-    "\\lib\\src",
-    "\\lib\\src\\interceptors"
-  ],
-  "SelectedNode": "\\package.json",
-  "PreviewInSolutionExplorer": false
+    "ExpandedNodes": [
+        "",
+        "\\integration",
+        "\\integration\\app",
+        "\\integration\\app\\src",
+        "\\integration\\app\\src\\examples",
+        "\\integration\\app\\src\\examples\\delivery",
+        "\\integration\\tests",
+        "\\integration\\tests\\interceptors",
+        "\\lib",
+        "\\lib\\src",
+        "\\lib\\src\\interceptors"
+    ],
+    "SelectedNode": "\\package.json",
+    "PreviewInSolutionExplorer": false
 }

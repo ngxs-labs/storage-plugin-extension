@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { Select, Store } from '@ngxs/store';
-
 import { Observable } from 'rxjs';
 
 import { Account } from './account';
@@ -22,7 +20,7 @@ export class AccountComponent implements OnInit {
 
     constructor(private readonly _store: Store) {}
 
-    ngOnInit() {
+    public ngOnInit(): void {
         const account: Account | undefined = this._store.selectSnapshot(AccountState.account);
 
         if (account) {

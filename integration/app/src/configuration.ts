@@ -1,9 +1,9 @@
 import { InterceptorStrategy } from '@ngxs-labs/storage-plugin-extension';
 
-import { AccountStateModel } from './examples/delivery/account.state';
-import { ShipmentStateModel } from './examples/delivery/shipment.state';
-import { Parcel } from './examples/delivery/parcel';
 import { Account } from './examples/delivery/account';
+import { AccountStateModel } from './examples/delivery/account.state';
+import { Parcel } from './examples/delivery/parcel';
+import { ShipmentStateModel } from './examples/delivery/shipment.state';
 
 export const strategy: InterceptorStrategy = new InterceptorStrategy([
     {

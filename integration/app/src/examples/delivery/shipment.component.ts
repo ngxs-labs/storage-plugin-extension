@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { Select, Store } from '@ngxs/store';
-
 import { Observable } from 'rxjs';
 
 import { Parcel } from './parcel';
@@ -25,7 +23,7 @@ export class ShipmentComponent implements OnInit {
 
     constructor(private readonly _store: Store) {}
 
-    ngOnInit() {
+    public ngOnInit(): void {
         const parcel: Parcel | undefined = this._store.selectSnapshot(ShipmentState.parcel);
 
         if (parcel) {
