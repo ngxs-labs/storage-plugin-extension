@@ -26,6 +26,33 @@ be executed on specific states.
 -   😎 Checkout the [sample application](./integration)
 -   📝 Learn about updates from the [changelog](CHANGELOG.md)
 
+### Usage
+
+Call the <code>InterceptorStrategy.configure</code> fluent method from within the <code>NgxsStoragePluginModule</code>
+configuration.
+
+```ts
+import { InterceptorStrategy } from '@ngxs-labs/storage-plugin-extension';
+
+const strategy: InterceptorStrategy = new InterceptorStrategy([
+    // Define your strategies here
+]);
+
+@NgModule({
+    // ...
+    imports: [
+        NgxsStoragePluginModule.forRoot(
+            strategy.configure({
+                // NgxsStoragePluginOptions
+            })
+        )
+    ],
+    // ...
+})
+export class AppModule {}
+
+```
+
 ### Delivery example
 
 In this example we use the <code>InterceptorStrategy</code> class to configure
@@ -157,6 +184,8 @@ export const strategy: InterceptorStrategy = new InterceptorStrategy([
 `app.module.ts`
 
 ```ts
+import { strategy } from './configuration';
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
